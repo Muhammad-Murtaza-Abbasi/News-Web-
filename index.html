@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Animated Navbar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .navbar {
+      backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.05);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 15px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border:  #478f8c 1px solid;
+    }
+
+    .navbar .logo {
+      color: #000000;
+      font-size: 26px;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .toggle-btn {
+      display: none;
+      font-size: 28px;
+      color: #000;
+      cursor: pointer;
+    }
+
+    .menu {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .menu a {
+      color: #000000;
+      text-decoration: none;
+      font-size: 16px;
+      position: relative;
+      transition: 0.3s ease-in-out;
+    }
+
+    .menu a::after {
+      content: "";
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      left: 0;
+      bottom: -4px;
+      background-color: #478f8c;
+      transition: width 0.3s ease;
+    }
+
+    .menu a:hover::after {
+      width: 100%;
+    }
+
+    .menu a:hover {
+      color: #478f8c;
+    }
+
+    .search-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .search-container input {
+      padding: 8px 14px;
+      border-radius: 30px;
+      border: 1px solid rgba(2, 2, 2, 0.706);
+      background: rgba(255,255,255,0.1);
+      color: rgb(13, 13, 13);
+      width: 200px;
+      transition: 0.4s ease;
+    }
+
+    .search-container input::placeholder {
+      color: rgba(255, 1, 1, 0.873);
+    }
+
+    .search-container input:focus {
+      outline: none;
+      background: rgba(255,255,255,0.2);
+      border-color: #478f8c;
+    }
+
+    .search-container button {
+      padding: 8px 16px;
+      background: linear-gradient(to right, #00c6ff, #0072ff);
+      border: none;
+      color: white;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .search-container button:hover {
+      box-shadow: 0 0 10px #00c6ffb3;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .toggle-btn {
+        display: block;
+      }
+
+      .menu,
+      .search-container {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        margin-top: 15px;
+      }
+
+      .menu.active,
+      .search-container.active {
+        display: flex;
+        animation: slideDown 0.3s ease;
+      }
+
+      @keyframes slideDown {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="logo">NewsWeb</div>
+
+    <div class="toggle-btn" onclick="toggleMenu()">☰</div>
+
+    <div class="menu" id="menu">
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <a href="#">Services</a>
+      <a href="#">Contact</a>
+    </div>
+
+    <div class="search-container" id="searchBox">
+      <input id="search" type="text" placeholder="Search...">
+      <button onclick="searchButton()">Search</button>
+    </div>
+  </nav>
+
+  <br />
+  <center><h1>News Update</h1></center>
+  <br />
+
+  <div class="news-card" id="main"></div>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById('menu').classList.toggle('active');
+      document.getElementById('searchBox').classList.toggle('active');
+    }
+  </script>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
